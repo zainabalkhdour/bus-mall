@@ -92,6 +92,23 @@ section p{
     padding: 40px;
 }
 
+article{
+    float: left;
+    position: relative;
+    bottom: 577px;
+    left: 38px;
+    padding: 63px;
+    text-align: justify;
+    line-height: normal;
+    background-color: #fff5ee5c;
+    border: outset;
+    border-radius: 12px;
+}
+
+ul li{
+    list-style: decimal-leading-zero;
+}
+
 footer{
     background-color: #faa39967;
     width: 100%;
