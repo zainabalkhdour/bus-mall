@@ -46,38 +46,39 @@ function randomNumber(min, max) {
 }
 
 //---------------------------------------------------------------------------------------------------------
+function updateimages(){
+    imageRender(leftImg); 
+    imageRender(centeredImg);
+    imageRender(rightImg);
+
+}
+
 let indexArr=[];
 function indexRender() {
     let index;
     do{
         index=randomNumber(0,productArray.length-1);
-        }while(indexArr.includes(index))
-           indexArr.push(index); 
-
-           
-           if (indexArr.length>3){
-               indexArr.splice(0,3);
-               
-                     
+    }while(indexArr.includes(index))
+    indexArr.push(index); 
+    
+    
+    if (indexArr.length>3){
+        indexArr.splice(0,3);
+        
+        
     }
-     return index; 
+    return index; 
 }
 
     function imageRender(img){
-        const index=  indexRender();
+        updateimages();
+        let index=  indexRender();
         img.src=productArray[index].path;
         img.alt=productArray[index].name;
         img.title=productArray[index].name;
         productArray[index].display++;
     }
-
-    function updateimages(){
-        imageRender(leftImg); 
-        imageRender(centeredImg);
-        imageRender(rightImg);
-
-    }
-    updateimages();
+    
 
 
     //
@@ -88,8 +89,8 @@ function indexRender() {
     
     imageContainer.addEventListener('click', clickhandler);
     let round = 25; 
-                      indexRender();
-                    imageRender(img);
+                    indexRender();
+                    imageRender();
                     updateimages();
     function clickhandler(event) {
         if (event.target.id !== 'selectImg') { 
@@ -97,6 +98,7 @@ function indexRender() {
             if (round === 0) {
                 imageContainer.removeEventListener('click',clickhandler);
                 resultRender();
+                chartRender();
             }else {
          
             for (let i = 0; i < 1; i++) {
@@ -126,3 +128,179 @@ function indexRender() {
     }
    
 }
+//-------------------------------------------------------------------------------------------------------------
+//canvas chart 
+function chartRender(){
+  
+ let barChart=document.getElementById('barChart').barChart.getcontext('2d');
+ console.log(barChart);
+ let selectArr=[];
+ let displayArr=[];
+ let nameArr=[];
+  for(i=0;i<productArray.length;i++){
+      nameArr.push(productArray[i].name);
+      selectArr.push(productArray[i].select);
+      displayArr.push(productArray[i].display);
+  }
+    tooo=new ChartData('barChart',{
+         type:'bar',
+         data: {
+            labels: nameArr,
+            datasets: [{
+                label: '# of select ',
+                data: selectArr,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+
+
+       
+                    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)'
+
+        
+
+                ],
+                borderWidth: 1
+            }],
+            datasets: [{
+                label: '# of dis play ',
+                data: displayArr,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+
+
+       
+                    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)'
+
+        
+
+                ],
+                borderWidth: 1
+            }]
+
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    
+    }
+
+
+//----------------------------------------------------------------------------------------------------------------
+
+function setStorageProducts(){
+    let productArrayData= JSON.stringify(productArray);
+    console.log(productArrayData);
+    localStorage.setItem('products',productArrayData);
+}
+
+function getProductStorage(){
+    let productArrayData=localStorage.getItem('products');
+    newProductArray=JSON.parse(productArrayData);
+
+
+    if(newProductArray){
+        for(let i=0;i<productArray.length;i++){
+            new product(
+                newProductArray[i].name,
+                newProductArray[i].extention,
+                newProductArray[i].path,
+                newProductArray[i].select,
+                newProductArray[i].display,
+
+            
+            )
+        }
+    }
+    resultRender();
+}
+setStorageProducts();
+getProductStorage();
